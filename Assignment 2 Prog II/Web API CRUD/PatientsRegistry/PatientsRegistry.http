@@ -1,0 +1,4 @@
+@PatientsRegistry_HostAddress = https://localhost:7247
+
+GET {{PatientsRegistry_HostAddress}}/api/patients
+Accept: application/json
