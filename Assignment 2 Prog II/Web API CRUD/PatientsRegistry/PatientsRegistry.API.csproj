@@ -14,4 +14,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PatientRegistry.Infrastructure\PatientRegistry.Infrastructure.csproj" />
+    <ProjectReference Include="..\PatientsRegistry.Domain\PatientsRegistry.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

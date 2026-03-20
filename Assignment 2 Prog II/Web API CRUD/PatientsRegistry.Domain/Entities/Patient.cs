@@ -1,4 +1,4 @@
-﻿namespace ManusHospital.Models
+﻿namespace PatientsRegistry.Domain.Entities
 {
     public class Patient
     {

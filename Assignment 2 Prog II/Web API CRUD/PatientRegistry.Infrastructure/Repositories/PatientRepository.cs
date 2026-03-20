@@ -1,9 +1,11 @@
 ﻿using Microsoft.Data.SqlClient;
-using PatientsRegistry.DTOs;
+using Microsoft.Extensions.Configuration;
+using PatientsRegistry.Domain.Entities;
+using PatientsRegistry.Domain.Interfaces;
 
-namespace PatientsRegistry
+namespace PatientsRegistry.Infrastructure.Repositories
 {
-    public class PatientRepository
+    public class PatientRepository : IPatientRepository
     {
         private readonly string _connectionString;
 
@@ -12,7 +14,7 @@ namespace PatientsRegistry
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        public void AddPatient(PatientCreateDTO patient)
+        public void AddPatient(Patient patient)
         {
             using SqlConnection connection = new SqlConnection(_connectionString);
 
@@ -36,9 +38,9 @@ namespace PatientsRegistry
             command.ExecuteNonQuery();
         }
 
-        public List<PatientReadDTO> GetAllPatients()
+        public List<Patient> GetAllPatients()
         {
-            List<PatientReadDTO> patients = new();
+            List<Patient> patients = new();
 
             using SqlConnection connection = new SqlConnection(_connectionString);
 
@@ -50,7 +52,7 @@ namespace PatientsRegistry
 
             while (reader.Read())
             {
-                patients.Add(new PatientReadDTO
+                patients.Add(new Patient
                 {
                     Id = (int)reader["Id"],
                     FullName = reader["FullName"].ToString()!,
@@ -65,7 +67,7 @@ namespace PatientsRegistry
             return patients;
         }
 
-        public void UpdatePatient(int id, PatientUpdateDTO patient)
+        public void UpdatePatient(int id, Patient patient)
         {
             using SqlConnection connection = new SqlConnection(_connectionString);
 
