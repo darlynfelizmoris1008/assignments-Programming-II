@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PatientsRegistry.Domain.Entities;
-using PatientsRegistry.Domain.Interfaces;
-using PatientsRegistry.DTOs;
+using PatientsRegistry.Application.Contract;
+using PatientsRegistry.Application.Dtos;
 
 namespace PatientsRegistry.Controllers
 {
@@ -9,70 +8,38 @@ namespace PatientsRegistry.Controllers
     [Route("api/[controller]")]
     public class PatientsController : ControllerBase
     {
-        private readonly IPatientRepository _repository;
+        private readonly IPatientService _service;
 
-        public PatientsController(IPatientRepository repository)
+        public PatientsController(IPatientService service)
         {
-            _repository = repository;
+            _service = service;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            var patients = _repository.GetAllPatients();
-
-            var result = patients.Select(p => new PatientReadDTO
-            {
-                Id = p.Id,
-                FullName = p.FullName,
-                NationalId = p.NationalId,
-                PhoneNumber = p.PhoneNumber,
-                EmergencyContactName = p.EmergencyContactName,
-                EmergencyContactPhone = p.EmergencyContactPhone,
-                Age = p.Age
-            }).ToList();
-
-            return Ok(result);
+            var patients = _service.GetAllPatients();
+            return Ok(patients);
         }
 
         [HttpPost]
         public IActionResult Create(PatientCreateDTO dto)
         {
-            var patient = new Patient
-            {
-                FullName = dto.FullName,
-                NationalId = dto.NationalId,
-                PhoneNumber = dto.PhoneNumber,
-                EmergencyContactName = dto.EmergencyContactName,
-                EmergencyContactPhone = dto.EmergencyContactPhone,
-                Age = dto.Age
-            };
-
-            _repository.AddPatient(patient);
+            _service.AddPatient(dto);
             return Ok("Patient created successfully.");
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, PatientUpdateDTO dto)
         {
-            var patient = new Patient
-            {
-                FullName = dto.FullName,
-                NationalId = dto.NationalId,
-                PhoneNumber = dto.PhoneNumber,
-                EmergencyContactName = dto.EmergencyContactName,
-                EmergencyContactPhone = dto.EmergencyContactPhone,
-                Age = dto.Age
-            };
-
-            _repository.UpdatePatient(id, patient);
+            _service.UpdatePatient(id, dto);
             return Ok("Patient updated successfully.");
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _repository.DeletePatient(id);
+            _service.DeletePatient(id);
             return Ok("Patient deleted successfully.");
         }
     }

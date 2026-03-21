@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PatientRegistry.Infrastructure\PatientRegistry.Infrastructure.csproj" />
+    <ProjectReference Include="..\PatientsRegistry.Application\PatientsRegistry.Application.csproj" />
     <ProjectReference Include="..\PatientsRegistry.Domain\PatientsRegistry.Domain.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PatientsRegistry.DTOs
+namespace PatientsRegistry.Application.Dtos
 {
     public class PatientUpdateDTO
     {

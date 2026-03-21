@@ -1,3 +1,5 @@
+using PatientsRegistry.Application.Contract;
+using PatientsRegistry.Application.Service;
 using PatientsRegistry.Domain.Interfaces;
 using PatientsRegistry.Infrastructure.Repositories;
 
@@ -8,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<IPatientService, PatientService>();
 
 var app = builder.Build();
 

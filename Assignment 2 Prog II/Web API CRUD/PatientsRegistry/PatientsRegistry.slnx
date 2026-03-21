@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="../PatientRegistry.Infrastructure/PatientRegistry.Infrastructure.csproj" Id="898d0b6b-3ee2-4378-8373-c9fbedca41bc" />
+  <Project Path="../PatientsRegistry.Application/PatientsRegistry.Application.csproj" Id="16ce133d-e031-45f5-8efc-950fffb23f1d" />
   <Project Path="../PatientsRegistry.Domain/PatientsRegistry.Domain.csproj" Id="3a388cf2-036e-4f03-a77d-7ae314b46822" />
   <Project Path="PatientsRegistry.API.csproj" />
 </Solution>
